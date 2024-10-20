@@ -1,4 +1,6 @@
 package com.ferreirasandro.petlife
+import java.io.Serializable
+
 data class Pet(
     var name: String,
     var birthDate: String,
@@ -9,3 +11,4 @@ data class Pet(
     var lastVaccination: String,
     var lastPetShopVisit: String
 )
+

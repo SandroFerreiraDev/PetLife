@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetLife"
         tools:targetApi="31">
+        <activity android:name=".EditPetActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
