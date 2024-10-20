@@ -7,6 +7,10 @@ android {
     namespace = "com.ferreirasandro.petlife"
     compileSdk = 34
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.ferreirasandro.petlife"
         minSdk = 26
