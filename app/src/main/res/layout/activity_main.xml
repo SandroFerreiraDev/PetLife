@@ -69,4 +69,22 @@
         android:text="Editar Dados do Pet"
         android:layout_marginTop="16dp"/>
 
+    <Button
+        android:id="@+id/btnChangeVetVisitDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alterar Última Visita ao Veterinário" />
+
+    <Button
+        android:id="@+id/btnChangeVaccinationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alterar Última Vacinação" />
+
+    <Button
+        android:id="@+id/btnChangePetShopVisitDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alterar Última Visita ao Petshop" />
+
 </LinearLayout>
