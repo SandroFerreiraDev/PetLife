@@ -46,6 +46,22 @@
         android:textSize="18sp"
         android:inputType="text"/>
 
+    <EditText
+        android:id="@+id/etTelConsultorio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Telefone Consultório"
+        android:textSize="18sp"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/etSiteConsultorio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Site Consultório"
+        android:textSize="18sp"
+        android:inputType="text"/>
+
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"

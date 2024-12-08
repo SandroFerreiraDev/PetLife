@@ -9,6 +9,8 @@ data class Pet(
     var size: String,
     var lastVetVisit: String,
     var lastVaccination: String,
-    var lastPetShopVisit: String
+    var lastPetShopVisit: String,
+    var telConsultorio: String,
+    var siteConsultorio: String,
 )
 

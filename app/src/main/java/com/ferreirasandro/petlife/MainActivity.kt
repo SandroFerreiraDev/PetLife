@@ -2,6 +2,7 @@ package com.ferreirasandro.petlife
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity() {
             size = "Médio",
             lastVetVisit = "01/09/2024",
             lastVaccination = "15/08/2024",
-            lastPetShopVisit = "10/08/2024"
+            lastPetShopVisit = "10/08/2024",
+            telConsultorio = "16999999999",
+            siteConsultorio = "www.google.com"
         )
 
         updateUI()
@@ -39,6 +42,8 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("type", pet.type)
             intent.putExtra("color", pet.color)
             intent.putExtra("size", pet.size)
+            intent.putExtra("telConsultorio", pet.telConsultorio)
+            intent.putExtra("siteConsultorio", pet.siteConsultorio)
             startActivityForResult(intent, 1)
         }
 
@@ -74,7 +79,24 @@ class MainActivity : AppCompatActivity() {
         binding.tvLastVetVisit.text = "Última Visita ao Veterinário: ${pet.lastVetVisit}"
         binding.tvLastVaccination.text = "Última Vacinação: ${pet.lastVaccination}"
         binding.tvLastPetShopVisit.text = "Última Visita ao Petshop: ${pet.lastPetShopVisit}"
+        binding.tvTelConsultorio.text = "Telefone Consultório: ${pet.telConsultorio}"
+        binding.tvSiteConsultorio.text = "Site Consultório: ${pet.siteConsultorio}"
+
+        binding.btnCallPhone.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:${pet.telConsultorio}")
+            }
+            startActivity(intent)
+        }
+
+        binding.btnGoToWebsite.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("http://${pet.siteConsultorio}")
+            }
+            startActivity(intent)
+        }
     }
+
 
     private fun showDatePicker(onDateSet: (String) -> Unit) {
         val calendar = Calendar.getInstance()
@@ -96,8 +118,11 @@ class MainActivity : AppCompatActivity() {
             pet.type = data.getStringExtra("type") ?: pet.type
             pet.color = data.getStringExtra("color") ?: pet.color
             pet.size = data.getStringExtra("size") ?: pet.size
+            pet.telConsultorio = data.getStringExtra("telConsultorio") ?: pet.telConsultorio
+            pet.siteConsultorio = data.getStringExtra("siteConsultorio") ?: pet.siteConsultorio
 
             updateUI()
         }
     }
+
 }
