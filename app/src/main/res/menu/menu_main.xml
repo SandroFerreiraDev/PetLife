@@ -7,19 +7,4 @@
         android:title="@string/add_pet"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/editPetMi"
-        android:title="@string/edit_pet"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/deletePetMi"
-        android:title="@string/delete_pet"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/infoPetMi"
-        android:title="@string/info_pet"
-        app:showAsAction="never" />
-
 </menu>

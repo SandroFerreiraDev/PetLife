@@ -66,8 +66,6 @@ class MainActivity : AppCompatActivity() {
             setSupportActionBar(it)
         }
 
-        fillPetList()
-
         amb.petsLv.adapter = petAdapter
         amb.petsLv.setOnItemClickListener { _, _, position, _ ->
             Intent(this, PetActivity::class.java).apply {
@@ -87,7 +85,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.addPetMi -> {
-            // Abrir tela para adicionar novo pet
             barl.launch(Intent(this, PetActivity::class.java))
             true
         }
@@ -96,9 +93,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?
-    ) = menuInflater.inflate(R.menu.context_menu_main, menu)
+    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menuInflater.inflate(R.menu.context_menu_main, menu)
+    }
+
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val position = (item.menuInfo as AdapterContextMenuInfo).position
@@ -123,14 +122,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        fillPetList()
+    }
+
     private fun fillPetList() {
         Thread {
+            val petsFromDb = mainController.getPets()
             runOnUiThread {
                 petList.clear()
-                petList.addAll(mainController.getPets())
+                petList.addAll(petsFromDb)
                 petAdapter.notifyDataSetChanged()
             }
         }.start()
     }
 }
-

@@ -8,9 +8,7 @@ data class Pet(
     val id: Long = 0L,
     val name: String = "",
     val type: String = "",
-    val breed: String = "",
-    val age: Int = 0,
-    val weight: Double = 0.0,
-    val birthDate: String = ""
-): Parcelable
-
+    val color: String = "",
+    val size: String = "",
+    val birthDate: String = "",
+) : Parcelable

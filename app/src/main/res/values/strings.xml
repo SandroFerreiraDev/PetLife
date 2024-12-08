@@ -13,4 +13,7 @@
     <string name="delete_pet">delete pet\n</string>
     <string name="info_pet">info\n</string>
     <string name="type">type\n</string>
+    <string name="size">size\n</string>
+    <string name="add_event">add event\n</string>
+    <string name="event_date">event date\n</string>
 </resources>
