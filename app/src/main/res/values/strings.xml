@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">PetLife</string>
+    <string name="name">name\n</string>
+    <string name="breed">breed\n</string>
+    <string name="birth_date">birth date\n</string>
+    <string name="weight">weight\n</string>
+    <string name="color">color\n</string>
+    <string name="save">save\n</string>
+    <string name="pet_life">pet life\n</string>
+    <string name="pet_list">pet list\n</string>
+    <string name="add_pet">add pet</string>
+    <string name="edit_pet">edit pet\n</string>
+    <string name="delete_pet">delete pet\n</string>
+    <string name="info_pet">info\n</string>
+    <string name="type">type\n</string>
 </resources>

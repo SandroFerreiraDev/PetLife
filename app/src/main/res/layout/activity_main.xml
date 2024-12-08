@@ -1,116 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".ui.MainActivity" >
 
-    <TextView
-        android:id="@+id/tvPetName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome: "
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvBirthDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data de Nascimento: "
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tipo: "
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cor: "
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Porte: "
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvLastVetVisit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Última Visita ao Veterinário: "
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvLastVaccination"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Última Vacinação: "
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvLastPetShopVisit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Última Visita ao Petshop: "
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvTelConsultorio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Telefone Consultório:"
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/tvSiteConsultorio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Site Consultório:"
-        android:textSize="18sp"/>
-
-    <Button
-        android:id="@+id/btnEditPet"
+    <include
+        android:id="@+id/toolbarIn"
+        layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar Dados do Pet"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/btnChangeVetVisitDate"
+    <ListView
+        android:id="@+id/petsLv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Alterar Última Visita ao Veterinário" />
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbarIn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <Button
-        android:id="@+id/btnChangeVaccinationDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Alterar Última Vacinação" />
-
-    <Button
-        android:id="@+id/btnChangePetShopVisitDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Alterar Última Visita ao Petshop" />
-
-    <Button
-        android:id="@+id/btnCallPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ligar para Consultório" />
-
-    <Button
-        android:id="@+id/btnGoToWebsite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ir ao Site do Consultório" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
