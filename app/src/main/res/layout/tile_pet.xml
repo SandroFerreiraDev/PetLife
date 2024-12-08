@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -10,27 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nome do Pet"
-        android:textSize="25sp" />
+        android:textSize="18sp" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/petTypeTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/petAgeTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Idade" />
-
-        <TextView
-            android:id="@+id/petLastVisitTv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="Última Visita" />
-    </LinearLayout>
-
+        android:text="Tipo"
+        android:textSize="16sp" />
 </LinearLayout>

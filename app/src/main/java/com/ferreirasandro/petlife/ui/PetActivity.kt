@@ -32,16 +32,20 @@ class PetActivity : AppCompatActivity() {
                 with(pet) {
                     nameEt.setText(name)
                     typeEt.setText(type)
-                    typeEt.isEnabled = false
+                    colorEt.setText(color)
+                    sizeEt.setText(size)
                     birthDateEt.setText(birthDate)
 
                     nameEt.isEnabled = !viewMode
+                    typeEt.isEnabled = !viewMode
+                    colorEt.isEnabled = !viewMode
+                    sizeEt.isEnabled = !viewMode
                     birthDateEt.isEnabled = !viewMode
+
                     saveBt.visibility = if (viewMode) View.GONE else View.VISIBLE
                 }
             }
         }
-
 
         apb.run {
             saveBt.setOnClickListener {
@@ -50,6 +54,8 @@ class PetActivity : AppCompatActivity() {
                         id = pet.id,
                         name = nameEt.text.toString(),
                         type = typeEt.text.toString(),
+                        color = colorEt.text.toString(),
+                        size = sizeEt.text.toString(),
                         birthDate = birthDateEt.text.toString()
                     ).let { updatedPet ->
                         petSqliteImpl.updatePet(updatedPet)
@@ -62,6 +68,8 @@ class PetActivity : AppCompatActivity() {
                         id = 0L,
                         name = nameEt.text.toString(),
                         type = typeEt.text.toString(),
+                        color = colorEt.text.toString(),
+                        size = sizeEt.text.toString(),
                         birthDate = birthDateEt.text.toString()
                     )
                     petSqliteImpl.createPet(newPet)
@@ -70,7 +78,6 @@ class PetActivity : AppCompatActivity() {
                     finish()
                 }
             }
-
         }
     }
 }

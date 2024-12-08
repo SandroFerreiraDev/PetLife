@@ -12,7 +12,6 @@ import com.ferreirasandro.petlife.R
 class PetSqliteImpl(context: Context) : PetDao {
 
     companion object {
-
         private const val PET_DATABASE_FILE = "petlife"
         private const val PET_TABLE = "pet"
         private const val ID_COLUMN = "id"
@@ -20,6 +19,7 @@ class PetSqliteImpl(context: Context) : PetDao {
         private const val TYPE_COLUMN = "type"
         private const val COLOR_COLUMN = "color"
         private const val SIZE_COLUMN = "size"
+        private const val BIRTHDATE_COLUMN = "birthDate"
 
         private const val CREATE_PET_TABLE_STATEMENT =
             "CREATE TABLE IF NOT EXISTS $PET_TABLE (" +
@@ -27,7 +27,8 @@ class PetSqliteImpl(context: Context) : PetDao {
                     "$NAME_COLUMN TEXT NOT NULL, " +
                     "$TYPE_COLUMN TEXT NOT NULL, " +
                     "$COLOR_COLUMN TEXT NOT NULL, " +
-                    "$SIZE_COLUMN TEXT NOT NULL);"
+                    "$SIZE_COLUMN TEXT NOT NULL, " +
+                    "$BIRTHDATE_COLUMN TEXT NOT NULL);"
     }
 
     private val petDatabase: SQLiteDatabase = context.openOrCreateDatabase(
@@ -38,7 +39,7 @@ class PetSqliteImpl(context: Context) : PetDao {
 
     init {
         try {
-            petDatabase.execSQL("DROP TABLE IF EXISTS $PET_TABLE")
+            //petDatabase.execSQL("DROP TABLE IF EXISTS $PET_TABLE")
 
             petDatabase.execSQL(CREATE_PET_TABLE_STATEMENT)
         } catch (se: SQLException) {
@@ -99,6 +100,7 @@ class PetSqliteImpl(context: Context) : PetDao {
             put(TYPE_COLUMN, type)
             put(COLOR_COLUMN, color)
             put(SIZE_COLUMN, size)
+            put(BIRTHDATE_COLUMN, birthDate)  // Salvando o birthDate
         }
     }
 
@@ -108,7 +110,8 @@ class PetSqliteImpl(context: Context) : PetDao {
             name = getString(getColumnIndexOrThrow(NAME_COLUMN)),
             type = getString(getColumnIndexOrThrow(TYPE_COLUMN)),
             color = getString(getColumnIndexOrThrow(COLOR_COLUMN)),
-            size = getString(getColumnIndexOrThrow(SIZE_COLUMN))
+            size = getString(getColumnIndexOrThrow(SIZE_COLUMN)),
+            birthDate = getString(getColumnIndexOrThrow(BIRTHDATE_COLUMN))  // Recuperando o birthDate
         )
     }
 }

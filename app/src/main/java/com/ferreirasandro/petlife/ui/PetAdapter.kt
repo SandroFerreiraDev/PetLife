@@ -18,8 +18,7 @@ class PetAdapter(
 
     private data class PetTileHolder(
         val nameTv: TextView,
-        val typeTv: TextView,
-        val birthDateTv: TextView
+        val typeTv: TextView
     )
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -36,7 +35,10 @@ class PetAdapter(
             )
             petTile = tpb.root
 
-            val newPetTileHolder = PetTileHolder(tpb.petNameTv, tpb.petAgeTv, tpb.petLastVisitTv)
+            val newPetTileHolder = PetTileHolder(
+                tpb.petNameTv,
+                tpb.petTypeTv
+            )
 
             petTile.tag = newPetTileHolder
         }
@@ -45,7 +47,6 @@ class PetAdapter(
         holder.let {
             it.nameTv.text = pet.name
             it.typeTv.text = pet.type
-            it.birthDateTv.text = pet.birthDate
         }
 
         return petTile
