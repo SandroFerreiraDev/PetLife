@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">PetLife</string>
     <string name="name">name\n</string>
-    <string name="breed">breed\n</string>
     <string name="birth_date">birth date\n</string>
-    <string name="weight">weight\n</string>
     <string name="color">color\n</string>
     <string name="save">save\n</string>
     <string name="pet_life">pet life\n</string>
@@ -16,4 +14,5 @@
     <string name="size">size\n</string>
     <string name="add_event">add event\n</string>
     <string name="event_date">event date\n</string>
+    <string name="event_list">event list\n</string>
 </resources>

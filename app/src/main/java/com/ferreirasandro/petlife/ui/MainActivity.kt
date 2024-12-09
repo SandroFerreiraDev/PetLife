@@ -40,26 +40,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(amb.root)
 
-        barl = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    result.data?.getParcelableExtra<Pet>(Constant.PET)
-                } else {
-                    result.data?.getParcelableExtra(Constant.PET, Pet::class.java)
-                }
-                pet?.let { receivedPet ->
-                    val position = petList.indexOfFirst { it.id == receivedPet.id }
-                    if (position == -1) {
-                        petList.add(receivedPet)
-                        mainController.insertPet(receivedPet)
+        barl =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                        result.data?.getParcelableExtra<Pet>(Constant.PET)
                     } else {
-                        petList[position] = receivedPet
-                        mainController.modifyPet(receivedPet)
+                        result.data?.getParcelableExtra(Constant.PET, Pet::class.java)
                     }
-                    petAdapter.notifyDataSetChanged()
+                    pet?.let { receivedPet ->
+                        val position = petList.indexOfFirst { it.id == receivedPet.id }
+                        if (position == -1) {
+                            petList.add(receivedPet)
+                            mainController.insertPet(receivedPet)
+                        } else {
+                            petList[position] = receivedPet
+                            mainController.modifyPet(receivedPet)
+                        }
+                        petAdapter.notifyDataSetChanged()
+                    }
                 }
             }
-        }
 
         amb.toolbarIn.toolbar.let {
             it.subtitle = getString(R.string.pet_list)
@@ -68,9 +69,9 @@ class MainActivity : AppCompatActivity() {
 
         amb.petsLv.adapter = petAdapter
         amb.petsLv.setOnItemClickListener { _, _, position, _ ->
-            Intent(this, PetActivity::class.java).apply {
-                putExtra(PET, petList[position])
-                putExtra(VIEW_MODE, true)
+            val petId = petList[position].id
+            Intent(this, EventListActivity::class.java).apply {
+                putExtra("PET_ID", petId)
                 startActivity(this)
             }
         }
@@ -88,12 +89,17 @@ class MainActivity : AppCompatActivity() {
             barl.launch(Intent(this, PetActivity::class.java))
             true
         }
+
         else -> {
             false
         }
     }
 
-    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
         super.onCreateContextMenu(menu, v, menuInfo)
         menuInflater.inflate(R.menu.context_menu_main, menu)
     }
@@ -109,12 +115,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
+
             R.id.removePetMi -> {
                 mainController.removePet(petList[position].id)
                 petList.removeAt(position)
                 petAdapter.notifyDataSetChanged()
                 true
             }
+
             else -> {
                 false
             }

@@ -12,7 +12,13 @@
         android:theme="@style/Theme.PetLife"
     tools:targetApi="31">
 
-    <!-- Atividades do PetLife -->
+        <activity
+            android:name=".ui.EventActivity"
+            android:exported="false" />
+        <activity
+
+            android:name=".ui.EventListActivity"
+            android:exported="false" />
     <activity
         android:name=".ui.PetActivity"
     android:exported="false" />

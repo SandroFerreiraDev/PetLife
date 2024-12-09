@@ -12,7 +12,7 @@ import com.ferreirasandro.petlife.R
 class PetSqliteImpl(context: Context) : PetDao {
 
     companion object {
-        private const val PET_DATABASE_FILE = "petlife"
+        const val PET_DATABASE_FILE = "petlife"
         private const val PET_TABLE = "pet"
         private const val ID_COLUMN = "id"
         private const val NAME_COLUMN = "name"
@@ -100,7 +100,7 @@ class PetSqliteImpl(context: Context) : PetDao {
             put(TYPE_COLUMN, type)
             put(COLOR_COLUMN, color)
             put(SIZE_COLUMN, size)
-            put(BIRTHDATE_COLUMN, birthDate)  // Salvando o birthDate
+            put(BIRTHDATE_COLUMN, birthDate)
         }
     }
 
@@ -111,7 +111,7 @@ class PetSqliteImpl(context: Context) : PetDao {
             type = getString(getColumnIndexOrThrow(TYPE_COLUMN)),
             color = getString(getColumnIndexOrThrow(COLOR_COLUMN)),
             size = getString(getColumnIndexOrThrow(SIZE_COLUMN)),
-            birthDate = getString(getColumnIndexOrThrow(BIRTHDATE_COLUMN))  // Recuperando o birthDate
+            birthDate = getString(getColumnIndexOrThrow(BIRTHDATE_COLUMN))
         )
     }
 }
