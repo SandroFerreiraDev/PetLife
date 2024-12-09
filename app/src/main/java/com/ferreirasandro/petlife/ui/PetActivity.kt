@@ -2,6 +2,7 @@ package com.ferreirasandro.petlife.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ferreirasandro.petlife.databinding.ActivityPetBinding
@@ -27,19 +28,34 @@ class PetActivity : AppCompatActivity() {
         val viewMode = intent.getBooleanExtra(VIEW_MODE, false)
         currentPet = intent.getParcelableExtra(PET)
 
+        val petTypes = listOf("Dog", "Cat")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, petTypes)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        apb.typeSpinner.adapter = adapter
+
+        val petSizes = listOf("Small", "Medium", "Large")
+        val sizeAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, petSizes)
+        sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        apb.sizeSpinner.adapter = sizeAdapter
+
         currentPet?.let { pet ->
             with(apb) {
                 with(pet) {
                     nameEt.setText(name)
-                    typeEt.setText(type)
+                    val petTypePosition = petTypes.indexOf(type)
+                    typeSpinner.setSelection(petTypePosition)
+
                     colorEt.setText(color)
-                    sizeEt.setText(size)
+
+                    val petSizePosition = petSizes.indexOf(size)
+                    sizeSpinner.setSelection(petSizePosition)
+
                     birthDateEt.setText(birthDate)
 
                     nameEt.isEnabled = !viewMode
-                    typeEt.isEnabled = !viewMode
+                    typeSpinner.isEnabled = !viewMode
                     colorEt.isEnabled = !viewMode
-                    sizeEt.isEnabled = !viewMode
+                    sizeSpinner.isEnabled = !viewMode
                     birthDateEt.isEnabled = !viewMode
 
                     saveBt.visibility = if (viewMode) View.GONE else View.VISIBLE
@@ -50,12 +66,15 @@ class PetActivity : AppCompatActivity() {
         apb.run {
             saveBt.setOnClickListener {
                 currentPet?.let { pet ->
+                    val selectedPetType = typeSpinner.selectedItem.toString()
+                    val selectedSize = sizeSpinner.selectedItem.toString()
+
                     Pet(
                         id = pet.id,
                         name = nameEt.text.toString(),
-                        type = typeEt.text.toString(),
+                        type = selectedPetType,
                         color = colorEt.text.toString(),
-                        size = sizeEt.text.toString(),
+                        size = selectedSize,
                         birthDate = birthDateEt.text.toString()
                     ).let { updatedPet ->
                         petSqliteImpl.updatePet(updatedPet)
@@ -67,9 +86,9 @@ class PetActivity : AppCompatActivity() {
                     val newPet = Pet(
                         id = 0L,
                         name = nameEt.text.toString(),
-                        type = typeEt.text.toString(),
+                        type = typeSpinner.selectedItem.toString(),
                         color = colorEt.text.toString(),
-                        size = sizeEt.text.toString(),
+                        size = sizeSpinner.selectedItem.toString(),
                         birthDate = birthDateEt.text.toString()
                     )
                     petSqliteImpl.createPet(newPet)
