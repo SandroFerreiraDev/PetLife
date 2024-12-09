@@ -51,36 +51,56 @@ class EventActivity : AppCompatActivity() {
                 dateEt.setText(event.date)
                 descriptionEt.setText(event.description)
 
+
+                if (event.type == EventType.REMEDY) {
+                    timeEt.setText(event.time)
+                    timeEt.visibility = View.VISIBLE
+                } else {
+                    timeEt.visibility = View.GONE
+                }
+
                 typeSpinner.isEnabled = !viewMode
                 dateEt.isEnabled = !viewMode
                 descriptionEt.isEnabled = !viewMode
+                timeEt.isEnabled = !viewMode
 
                 saveBt.visibility = if (viewMode) View.GONE else View.VISIBLE
             }
         }
 
-
-        aeb.run {
-            saveBt.setOnClickListener {
-                val selectedType = EventType.fromString(typeSpinner.selectedItem.toString()) ?: EventType.VETERINARY_VISIT
-                val updatedEvent = Event(
-                    id = currentEvent?.id ?: 0L,
-                    petId = petId,
-                    type = selectedType,
-                    date = dateEt.text.toString(),
-                    description = descriptionEt.text.toString()
-                )
-
-                if (currentEvent != null) {
-                    eventSqliteImpl.updateEvent(updatedEvent)
-                    Toast.makeText(this@EventActivity, "Event updated", Toast.LENGTH_SHORT).show()
-                } else {
-                    eventSqliteImpl.createEvent(updatedEvent)
-                    Toast.makeText(this@EventActivity, "Event added", Toast.LENGTH_SHORT).show()
-                }
-                setResult(RESULT_OK)
-                finish()
+        aeb.typeSpinner.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedType = EventType.values()[position]
+                aeb.timeEt.visibility = if (selectedType == EventType.REMEDY) View.VISIBLE else View.GONE
             }
+
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
+            }
+        }
+
+
+        aeb.saveBt.setOnClickListener {
+            val selectedType = EventType.fromString(aeb.typeSpinner.selectedItem.toString()) ?: EventType.VETERINARY_VISIT
+
+            val updatedEvent = Event(
+                id = currentEvent?.id ?: 0L,
+                petId = petId,
+                type = selectedType,
+                date = aeb.dateEt.text.toString(),
+                description = aeb.descriptionEt.text.toString(),
+                time = aeb.timeEt.text.toString()
+            )
+
+            if (currentEvent != null) {
+                eventSqliteImpl.updateEvent(updatedEvent)
+                Toast.makeText(this@EventActivity, "Event updated", Toast.LENGTH_SHORT).show()
+            } else {
+                eventSqliteImpl.createEvent(updatedEvent)
+                Toast.makeText(this@EventActivity, "Event added", Toast.LENGTH_SHORT).show()
+            }
+
+            setResult(RESULT_OK)
+            finish()
         }
     }
 }

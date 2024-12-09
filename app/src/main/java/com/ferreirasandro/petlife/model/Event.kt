@@ -9,5 +9,8 @@ data class Event(
     val petId: Long = 0L,
     val type: EventType = EventType.VETERINARY_VISIT,
     val date: String = "",
-    val description: String = ""
-) : Parcelable
+    val description: String = "",
+    val time: String = "",
+) : Parcelable {
+
+}

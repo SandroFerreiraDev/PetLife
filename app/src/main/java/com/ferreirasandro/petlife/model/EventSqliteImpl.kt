@@ -17,6 +17,7 @@ class EventSqliteImpl(context: Context) : EventDao {
         private const val TYPE_COLUMN = "type"
         private const val DATE_COLUMN = "date"
         private const val DESCRIPTION_COLUMN = "description"
+        private const val TIME_COLUMN = "time"
 
         private const val CREATE_EVENT_TABLE_STATEMENT =
             "CREATE TABLE IF NOT EXISTS $EVENT_TABLE (" +
@@ -25,6 +26,7 @@ class EventSqliteImpl(context: Context) : EventDao {
                     "$TYPE_COLUMN TEXT NOT NULL, " +
                     "$DATE_COLUMN TEXT NOT NULL, " +
                     "$DESCRIPTION_COLUMN TEXT NOT NULL, " +
+                    "$TIME_COLUMN TEXT NOT NULL, " +
                     "FOREIGN KEY($PET_ID_COLUMN) REFERENCES pet(id));"
     }
 
@@ -104,6 +106,7 @@ class EventSqliteImpl(context: Context) : EventDao {
             put(TYPE_COLUMN, type.displayName)
             put(DATE_COLUMN, date)
             put(DESCRIPTION_COLUMN, description)
+            put(TIME_COLUMN, time)
         }
     }
 
@@ -116,7 +119,9 @@ class EventSqliteImpl(context: Context) : EventDao {
             petId = getLong(getColumnIndexOrThrow(PET_ID_COLUMN)),
             type = eventType,
             date = getString(getColumnIndexOrThrow(DATE_COLUMN)),
-            description = getString(getColumnIndexOrThrow(DESCRIPTION_COLUMN))
+            description = getString(getColumnIndexOrThrow(DESCRIPTION_COLUMN)),
+            time = getString(getColumnIndexOrThrow(TIME_COLUMN)
+            )
         )
     }
 
